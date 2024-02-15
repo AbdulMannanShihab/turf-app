@@ -12,9 +12,25 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
+                    @if( Auth::user()->role == 'super-admin')
+                        <x-nav-link :href="route('SuperAdmin')" :active="request()->routeIs('SuperAdmin')">
+                            {{ __('Dashboard') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('SuperAdmin')" :active="request()->routeIs('Category')">
+                            {{ __('Category') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('SuperAdmin')" :active="request()->routeIs('Post')">
+                            {{ __('Post') }}
+                        </x-nav-link>
+                    @elseif( Auth::user()->role == 'admin')
+                        <x-nav-link :href="route('admin')" :active="request()->routeIs('admin')">
+                            {{ __('Dashboard') }}
+                        </x-nav-link>
+                    @else
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                            {{ __('Dashboard') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 

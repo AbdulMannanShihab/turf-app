@@ -45,16 +45,18 @@ class ProfileController extends Controller
         $request->validateWithBag('userDeletion', [
             'password' => ['required', 'current_password'],
         ]);
-
+        
         $user = $request->user();
 
         Auth::logout();
-
-        $user->delete();
-
+        $user-> deleted = 'Yes';
+        $user-> status  = 'Inactive';
+        $user->deleted_at = now();
+        $user-> save();
+    
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return Redirect::to('/');
+        return Redirect::to('/login');
     }
 }
