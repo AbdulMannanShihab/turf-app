@@ -16,11 +16,8 @@
                         <x-nav-link :href="route('SuperAdmin')" :active="request()->routeIs('SuperAdmin')">
                             {{ __('Dashboard') }}
                         </x-nav-link>
-                        <x-nav-link :href="route('SuperAdmin')" :active="request()->routeIs('Category')">
-                            {{ __('Category') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('SuperAdmin')" :active="request()->routeIs('Post')">
-                            {{ __('Post') }}
+                        <x-nav-link :href="route('Users')" :active="request()->routeIs('Users')">
+                            {{ __('Users') }}
                         </x-nav-link>
                     @elseif( Auth::user()->role == 'admin')
                         <x-nav-link :href="route('admin')" :active="request()->routeIs('admin')">

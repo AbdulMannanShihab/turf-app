@@ -27,7 +27,7 @@ class AuthenticatedSessionController extends Controller
     {
         //$request->authenticate();
         $request->validate([
-            'email' => 'required|email',
+            'email' => 'required | email',
             'password' => 'required',
         ]);
 
@@ -35,7 +35,7 @@ class AuthenticatedSessionController extends Controller
 
         if (Auth::attempt($credentials, $request->filled('remember'))) {
             
-            if (Auth::user()->deleted_at === null AND Auth::user()->deleted === 'No') {
+            if (Auth::user()->status === 'Active' AND Auth::user()->deleted === 'No') {
 
                 $request->session()->regenerate();
 
@@ -52,7 +52,7 @@ class AuthenticatedSessionController extends Controller
                 }
             } else {
                 Auth::logout();
-                return back()->withErrors(['email' => 'Your account has been deleted.']);
+                return back()->withErrors(['email' => 'Your account has been Inactive.']);
             }
         }
 
@@ -70,6 +70,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/login');
     }
 }
