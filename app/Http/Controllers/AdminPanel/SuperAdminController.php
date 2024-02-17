@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\AdminPanel;
-
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -30,6 +30,10 @@ class SuperAdminController extends Controller
 
     public function store(Request $req)
     {
+        $req->validate([
+            'name'  => 'required',
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+        ]);
         $user = DB::table('users')->insert(
             [
                 'name'      => $req->name,
@@ -38,6 +42,7 @@ class SuperAdminController extends Controller
                 'password'  => bcrypt('password'),
             ]
         );
+        flash()->addSuccess('User Create Successfully.');
         return redirect()->route('Users');
     }
 
@@ -50,6 +55,11 @@ class SuperAdminController extends Controller
 
     public function update(Request $req, string $id)
     {
+        $req->validate([
+            'name'  => 'required',
+            'email' => 'required | email',
+        ]);
+
         DB::table('users')
         ->where('id', $id)
         ->update([
@@ -57,7 +67,8 @@ class SuperAdminController extends Controller
             'email'     => $req->email,
             'role'      => $req->role,
             'status'    => $req->status,
-        ]); 
+        ]);
+        flash()->addSuccess('User Update Successfully.'); 
         return redirect()->route('Users');
     }
 
@@ -68,7 +79,8 @@ class SuperAdminController extends Controller
         ->update([
             'status'  => 'Inactive',
             'deleted' => 'Yes',
-        ]); 
+        ]);
+        flash()->addWarning('This account are Inactive.'); 
         return redirect()->route('Users');
     }
 
@@ -90,7 +102,8 @@ class SuperAdminController extends Controller
         ->update([
             'status'  => 'Active',
             'deleted' => 'No',
-        ]); 
+        ]);
+        flash()->addWarning('This account are Active.');  
         return redirect()->route('Trashlist');
     }
 
@@ -101,7 +114,8 @@ class SuperAdminController extends Controller
         ->update([
             'status'  => 'Inactive',
             'deleted_at' => Now(),
-        ]); 
+        ]);
+        flash()->addInfo('Your account is Deleted.');  
         return redirect()->route('Trashlist');
     }
 

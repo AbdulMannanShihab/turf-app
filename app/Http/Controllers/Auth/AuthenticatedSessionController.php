@@ -52,10 +52,11 @@ class AuthenticatedSessionController extends Controller
                 }
             } else {
                 Auth::logout();
+                flash()->addError('Your account has been Inactive.');
                 return back()->withErrors(['email' => 'Your account has been Inactive.']);
             }
         }
-
+        flash()->addError('The provided credentials do not match our records.');
         return back()->withErrors(['email' => 'The provided credentials do not match our records.']);
     }
 
