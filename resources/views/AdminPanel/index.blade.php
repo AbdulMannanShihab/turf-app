@@ -12,9 +12,7 @@
                     <a href="{{ route('Trashlist')}}">Restore</a>
                 </x-secondary-button>
             </div>
-            
         </div>
-        
     </x-slot>
 
     <div class="py-12">
@@ -44,9 +42,6 @@
                                 <td class="px-4 py-2 border border-gray-400">{{ $user -> role}}</td>
                                 <td class="px-4 py-2 border border-gray-400 text-center">{{ $user -> status}}</td>
                                 <td class="px-4 py-2 border border-gray-400 flex justify-center">
-                                    <x-primary-button class="ms-3">
-                                        <a href="">View</a>
-                                    </x-primary-button>
                                     <x-secondary-button class="ms-3">
                                         <a href="{{route('UserEdit', $user->id)}}">Edit</a>
                                     </x-second-button>

@@ -43,9 +43,9 @@
                                     <td class="px-4 py-2 border border-gray-400">{{ $user -> role}}</td>
                                     <td class="px-4 py-2 border border-gray-400 text-center">{{ $user -> status}}</td>
                                     <td class="px-4 py-2 border border-gray-400 flex justify-center">
-                                        <x-success-button class="ms-3">
+                                        <x-primary-button class="ms-3">
                                             <a href="{{route('UserRestore', $user->id)}}">Restore</a>
-                                        </x-success-button>
+                                        </x-primary-button>
                                         <x-danger-button class="ms-3">
                                             <a href="{{route('UserDelete', $user->id)}}">Delete</a>
                                         </x-danger-button>

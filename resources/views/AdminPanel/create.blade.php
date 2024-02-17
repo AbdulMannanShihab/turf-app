@@ -1,9 +1,14 @@
 <x-app-layout>
     
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Create New User
-        </h2>
+        <div class="flex justify-between">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                Create New User
+            </h2>
+            <x-primary-button class="ms-3">
+                <a href="{{ route('Users')}}">Back</a>
+            </x-primary-button>
+        </div>
     </x-slot>
 
     <div class="py-12">
