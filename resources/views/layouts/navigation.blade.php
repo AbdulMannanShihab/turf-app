@@ -36,6 +36,9 @@
                         <x-nav-link :href="route('turf_category.index')" :active="request()->routeIs('turf_category.index')">
                             {{ __('Category') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('turf_schedule.index')" :active="request()->routeIs('turf_schedule.index')">
+                            {{ __('Schedule') }}
+                        </x-nav-link>
                     @else
                         <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                             {{ __('Dashboard') }}
