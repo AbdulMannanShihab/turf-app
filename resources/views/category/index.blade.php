@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex justify-between">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Category') }}
+                Manage Turf Category
             </h2>
             <div>
                 <x-primary-button
@@ -38,10 +38,17 @@
                         </thead>
                         <tbody>
                         @foreach($turf_categories as $category)
+                            
                             <tr>
                                 <td class="px-4 py-2 border border-gray-400">{{ $Sl++ }}</td>
                                 <td class="px-4 py-2 border border-gray-400">{{ $category -> category_name}}</td>
-                                <td class="px-4 py-2 border border-gray-400 text-center">{{ $category -> status}}</td>
+                                <td class="px-4 py-2 border border-gray-400 text-center">
+                                    @if($category->status === 'Active')
+                                        <span class="px-4 py-2 bg-green-600 text-white rounded-md font-semibold text-xs">{{ $category->status }}</span>
+                                    @else
+                                        <span class="px-4 py-2 bg-red-600 text-white rounded-md font-semibold text-xs">{{ $category->status }}</span>
+                                    @endif
+                                </td>
                                 <td class="px-4 py-2 border border-gray-400 flex justify-center">
                                     <x-secondary-button class="ms-3">
                                         <a href="{{route('turf_category.edit', $category->id)}}">Edit</a>

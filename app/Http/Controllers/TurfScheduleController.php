@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class TurfScheduleController extends Controller
@@ -54,6 +55,8 @@ class TurfScheduleController extends Controller
                 'end_time'             => $request->end_time,
                 'booking_price'        => $request->booking_price,
                 'price'                => $request->price,
+                'created_by'           => Auth::user()->id,
+                'created_at'           => Now(),
                 
             ]
         );
@@ -110,6 +113,8 @@ class TurfScheduleController extends Controller
             'booking_price'     => $request->booking_price,
             'price'             => $request->price,
             'status'            => $request->status,
+            'update_by'         => Auth::user()->id,
+            'update_at'         => Now(),
         ]);
 
         flash()->addSuccess('Schedule Update Successfully.');
@@ -122,6 +127,8 @@ class TurfScheduleController extends Controller
         ->where('id', $id)
         ->update([
             'deleted' => 'Yes',
+            'deleted_by' => Auth::user()->id,
+            'deleted_at' => Now(),
             'status'  => 'Inactive',
         ]);
 

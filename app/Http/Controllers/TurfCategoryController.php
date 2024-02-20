@@ -45,6 +45,7 @@ class TurfCategoryController extends Controller
                                 [
                                     'category_name'      => $request->category_name,
                                     'created_by'         => Auth::user()->id,
+                                    'created_at'         => Now(),
                                 ]
                             );
         //return $turf_category;
@@ -83,8 +84,9 @@ class TurfCategoryController extends Controller
         ->where('id', $id)
         ->update([
             'category_name'      => $request->category_name,
-            'update_by'          => Auth::user()->id,
             'status'             => $request->status,
+            'update_by'          => Auth::user()->id,
+            'update_at'          => Now(),
         ]);
         flash()->addSuccess('Category update Successfully.');
         return redirect()->route('turf_category.index');
@@ -100,6 +102,7 @@ class TurfCategoryController extends Controller
         ->update([
             'deleted' => 'Yes',
             'deleted_by' => Auth::user()->id,
+            'deleted_at' => Now(),
             'status'  => 'Inactive',
         ]);
 

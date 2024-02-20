@@ -48,7 +48,13 @@
                                         <li>Booking Price : {{ $turf_schedule -> booking_price}}</li>
                                         <li>Price : {{ $turf_schedule -> price}} </li>
                                     </td>
-                                    <td class="px-4 py-2 border border-gray-400 text-center">{{ $turf_schedule -> status}}</td>
+                                    <td class="px-4 py-2 border border-gray-400 text-center">
+                                        @if($turf_schedule->status === 'Active')
+                                            <span class="px-4 py-2 bg-green-600 text-white rounded-md font-semibold text-xs">{{ $turf_schedule -> status}}</span>
+                                        @else
+                                            <span class="px-4 py-2 bg-red-600 text-white rounded-md font-semibold text-xs">{{ $turf_schedule -> status}}</span>
+                                        @endif
+                                    </td>
                                     <td class="px-4 py-2  flex justify-center">
                                         <x-secondary-button class="ms-3 mt-2">
                                             <a href="{{route('turf_schedule.edit', $turf_schedule->id)}}">Edit</a>

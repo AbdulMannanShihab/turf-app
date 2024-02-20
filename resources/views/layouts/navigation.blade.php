@@ -107,6 +107,12 @@
                 <x-responsive-nav-link :href="route('admin')" :active="request()->routeIs('admin')">
                     {{ __('Dashboard') }}
                 </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('turf_category.index')" :active="request()->routeIs('turf_category.index')">
+                    {{ __('Category') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('turf_schedule.index')" :active="request()->routeIs('turf_schedule.index')">
+                    {{ __('Schedule') }}
+                </x-responsive-nav-link>
             @else
                 <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                     {{ __('Dashboard') }}

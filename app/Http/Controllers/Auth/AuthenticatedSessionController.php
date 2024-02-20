@@ -40,14 +40,18 @@ class AuthenticatedSessionController extends Controller
                 $request->session()->regenerate();
 
                 if($request->user()->role === 'super-admin'){
-                    
+
+                    flash()->addSuccess('Welcome '.Auth::user()->name);
                     return redirect()->route('SuperAdmin');
         
                 }elseif($request->user()->role === 'admin'){
-                    
+
+                    flash()->addSuccess('Welcome '.Auth::user()->name);
                     return redirect()->route('admin');
         
                 }else{
+
+                    flash()->addSuccess('Welcome '.Auth::user()->name);
                     return redirect()->intended('/dashboard');
                 }
             } else {

@@ -2,15 +2,15 @@
     <x-slot name="header">
         <div class="flex justify-between">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Users') }}
+                Manage Users
             </h2>
             <div>
-                <x-primary-button class="ms-3">
-                    <a href="{{ route('UsersCreate')}}">Create</a>
-                </x-primary-button>
                 <x-secondary-button class="ms-3">
                     <a href="{{ route('Trashlist')}}">Restore</a>
                 </x-secondary-button>
+                <x-primary-button class="ms-3">
+                    <a href="{{ route('UsersCreate')}}">Create</a>
+                </x-primary-button>
             </div>
         </div>
     </x-slot>
@@ -40,7 +40,13 @@
                                 <td class="px-4 py-2 border border-gray-400">{{ $user -> name}}</td>
                                 <td class="px-4 py-2 border border-gray-400">{{ $user -> email}}</td>
                                 <td class="px-4 py-2 border border-gray-400">{{ $user -> role}}</td>
-                                <td class="px-4 py-2 border border-gray-400 text-center">{{ $user -> status}}</td>
+                                <td class="px-4 py-2 border border-gray-400 text-center">
+                                    @if($user -> status === 'Active')
+                                        <span class="px-4 py-2 bg-green-600 text-white rounded-md font-semibold text-xs">{{ $user -> status}}</span>
+                                    @else
+                                        <span class="px-4 py-2 bg-red-600 text-white rounded-md font-semibold text-xs">{{ $user -> status}}</span>
+                                    @endif
+                                </td>
                                 <td class="px-4 py-2 border border-gray-400 flex justify-center">
                                     <x-secondary-button class="ms-3">
                                         <a href="{{route('UserEdit', $user->id)}}">Edit</a>
