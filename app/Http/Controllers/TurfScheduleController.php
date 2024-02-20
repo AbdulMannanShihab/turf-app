@@ -14,8 +14,7 @@ class TurfScheduleController extends Controller
                             ->leftJoin('turf_categories', 'turf_schedules.turf_category_id' , '=', 'turf_categories.id')
                             ->where('turf_schedules.deleted_at', Null)
                             ->where('turf_schedules.deleted', 'No')
-                            ->orderBy('turf_schedules.id')
-                            ->Paginate(3);
+                            ->orderBy('turf_schedules.id')->get();
 
         return view('schedule.index', [
             'turf_schedules' => $turf_schedule,
@@ -114,7 +113,7 @@ class TurfScheduleController extends Controller
             'price'             => $request->price,
             'status'            => $request->status,
             'update_by'         => Auth::user()->id,
-            'update_at'         => Now(),
+            'updated_at'         => Now(),
         ]);
 
         flash()->addSuccess('Schedule Update Successfully.');

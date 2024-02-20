@@ -13,16 +13,11 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-5">
-                <div class="flex justify-between px-4 py-4">
-                    <h3>Schedule List</h3>
-                    <p>Search</p>
-                </div>
                 <div class="overflow-x-auto px-4 py-4">
                     @php
                         $Sl = 1;
                     @endphp
-                
-                    <table class="table-auto border-collapse border border-gray-400" style="width: 100%;">
+                    <table id="Turf_Schedule_Table" class="display table-auto border-collapse border border-gray-400">
                         <thead>
                             <tr>
                                 <th class="px-4 py-2 text-gray-600 font-bold border border-gray-400">SL</th>
@@ -50,9 +45,13 @@
                                     </td>
                                     <td class="px-4 py-2 border border-gray-400 text-center">
                                         @if($turf_schedule->status === 'Active')
-                                            <span class="px-4 py-2 bg-green-600 text-white rounded-md font-semibold text-xs">{{ $turf_schedule -> status}}</span>
+                                            <x-active-button class="ms-3 mt-2">
+                                                {{ $turf_schedule -> status}}
+                                            </x-active-button>
                                         @else
-                                            <span class="px-4 py-2 bg-red-600 text-white rounded-md font-semibold text-xs">{{ $turf_schedule -> status}}</span>
+                                            <x-inactive-button>
+                                                {{ $turf_schedule -> status}}
+                                            </x-inactive-button>
                                         @endif
                                     </td>
                                     <td class="px-4 py-2  flex justify-center">
@@ -63,13 +62,23 @@
                                 </tr>
                             @endforeach
                         </tbody>
-                    </table>
-                    <div class="px-2 py-2">
-                        {{ $turf_schedules -> links() }}
-                    </div>
-                                    
+                    </table>                
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- require page -->
+    @push('scripts')
+        <script>
+            $(document).ready(function() {
+                $('#Turf_Schedule_Table').DataTable( {
+                    dom: 'Bfrtip',
+                    buttons: [
+                        'pageLength'
+                    ]
+                } );
+            } );
+        </script>
+    @endpush
 </x-app-layout>
