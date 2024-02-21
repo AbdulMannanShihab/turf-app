@@ -14,11 +14,10 @@ class TurfCategoryController extends Controller
     public function index()
     {
         $turf_categories = DB::table('turf_categories')
+                                ->select('id', 'category_name', 'status')
                                 ->where('deleted_at', Null)
                                 ->where('deleted', 'No')
-                                ->orderBy('id')
-                                ->Paginate(5);
-
+                                ->orderBy('id')->get();
         return view('category.index', ['turf_categories' => $turf_categories]);
     }
 
@@ -79,18 +78,29 @@ class TurfCategoryController extends Controller
         $request->validateWithBag('category_name',[
             'category_name'  => ['required', 'string', 'min:3'],
         ]);
+            if ($request->status) {
 
-        DB::table('turf_categories')
-        ->where('id', $id)
-        ->update([
-            'category_name'      => $request->category_name,
-            'status'             => $request->status,
-            'update_by'          => Auth::user()->id,
-            'update_at'          => Now(),
-        ]);
-        flash()->addSuccess('Category update Successfully.');
-        return redirect()->route('turf_category.index');
-    }
+                DB::table('turf_categories')
+                    ->where('id', $id)
+                    ->update([
+                        'category_name'      => $request->category_name,
+                        'status'             => $request->status,
+                        'update_by'          => Auth::user()->id,
+                        'updated_at'          => Now(),
+                    ]);
+
+                DB::table('turf_schedules')
+                    ->where('turf_category_id', $id)
+                    ->update([
+                        'status'             => $request->status,
+                        'update_by'          => Auth::user()->id,
+                        'updated_at'         => Now(),
+                    ]);
+                flash()->addSuccess('Category update Successfully.');
+                return redirect()->route('turf_category.index');
+            }
+        }
+     
 
     /**
      * Remove the specified resource from storage.

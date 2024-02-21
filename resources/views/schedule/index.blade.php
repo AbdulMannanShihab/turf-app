@@ -17,7 +17,7 @@
                     @php
                         $Sl = 1;
                     @endphp
-                    <table id="Turf_Schedule_Table" class="display table-auto border-collapse border border-gray-400">
+                    <table id="TurfScheduleDataTable" class="display table-auto border-collapse border border-gray-400">
                         <thead>
                             <tr>
                                 <th class="px-4 py-2 text-gray-600 font-bold border border-gray-400">SL</th>
@@ -72,13 +72,13 @@
     @push('scripts')
         <script>
             $(document).ready(function() {
-                $('#Turf_Schedule_Table').DataTable( {
+                $('#TurfScheduleDataTable').DataTable( {
                     dom: 'Bfrtip',
                     buttons: [
                         'pageLength'
                     ]
                 } );
-            } );
+            } );zz
         </script>
     @endpush
 </x-app-layout>

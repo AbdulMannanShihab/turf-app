@@ -30,8 +30,8 @@
     </x-modal>
 </section>
 
-<!-- <section class="space-y-6">
-    <x-modal name="turf-category-edit" :show="$errors->category_name->isNotEmpty()" focusable>
+<section class="space-y-6">
+    <x-modal id="turf-category-edit" name="turf-category-edit" :show="$errors->category_name->isNotEmpty()" focusable>
         <div class="mt-6 bold px-6">
             <h4>Edit Turf Category</h4>
         </div>
@@ -62,4 +62,4 @@
             </div>
         </form>
     </x-modal>
-</section> -->
+</section>
